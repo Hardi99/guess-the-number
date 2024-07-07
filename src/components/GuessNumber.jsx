@@ -16,19 +16,23 @@ function GuessTheNumber() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setAttempts([...attempts, guess]);
-        setCount(count + 1)
+
+        if (!guess) {
+            setMessage('Vous devez entrer un chiffre');
+            return;
+        }
 
         if (guess < secretNumber) {
             setMessage('Trop bas!');
         } else if (guess > secretNumber) {
             setMessage('Trop haut!');
-        } else if (!guess) {
-            setMessage('Vous devez entrer un chiffre')
         } else {
             setMessage('Bravo ! Vous avez deviné le nombre !');
-            setMessage2(`Vous avez essayé ${count} fois en essayant précédemment [${attempts}]`)
+            setMessage2(`Vous avez trouvé en ${count} tentatives en essayant précédemment [${attempts.join(', ')}]`);
         }
+
+        setAttempts([...attempts, guess]);
+        setCount(count + 1);
     };
 
     const handleReset = () => {
@@ -42,8 +46,9 @@ function GuessTheNumber() {
 
     return (
             <div>
+                <h1>🔢 Guess the Number 🔢</h1>
                 <form onSubmit={handleSubmit}>
-                    <h1>Guess the number</h1>
+                    <p>Veuillez saisir un chiffre</p>
                     <input type="number" min={0} max={99} step={1} value={guess} onChange={handleChange} />
                     <button type="submit">Deviner</button>
                     <button type="reset" onClick={handleReset}>Réinitialiser</button>
