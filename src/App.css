@@ -1,3 +1,14 @@
+:root {
+  --primary-color: #007BFF;
+  --secondary-color: #DC3545;
+  --disabled-color: #ccc;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --border-color: #ddd;
+  --box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  --border-radius: 5px;
+}
+
 *{
   box-sizing: border-box;
 }
@@ -51,27 +62,34 @@ button {
   width: 100%;
   padding: 10px;
   border: none;
-  border-radius: 5px;
-  background-color: #007BFF;
+  border-radius: var(--border-radius);
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition plus douce */
 }
 
-button:hover {
-  background-color: #0056b3;
+
+button[type="submit"] {
+  background-color: var(--primary-color);
 }
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  }
 
 button[type="reset"] {
-  background-color: #DC3545;
+  background-color: var(--secondary-color);
 }
 
 button[type="reset"]:hover {
   background-color: #C82333;
-}
+  }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: var(--disabled-color);
   cursor: not-allowed;
+  opacity: 0.6;  /* meilleure indication visuelle pour la désactivation */
+  pointer-events: none; /* Empêche les événements de pointeur sur le bouton désactivé. */
 }
 
 p {
